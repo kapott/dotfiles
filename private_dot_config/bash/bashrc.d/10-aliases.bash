@@ -16,11 +16,13 @@ alias l='ls -CF'
 alias f='find'
 alias g='git'
 alias t='tmux new -AsBOFH'
-#alias k='kubectl'
+# alias c= # Managed door zoxide
+# alias k='kubectl' # k wrapper functies van kubectl van toepassing.
 alias l='ls'
 alias m='mutt'
 alias v='vim'
 alias u='upg'
+alias z='chezmoi'
 
 # Two letter aliases
 alias ff='find . -type f -name'
