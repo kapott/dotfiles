@@ -8,19 +8,19 @@
 brew install fzf ripgrep zoxide
 
 {{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
-sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim
 
 {{ else if eq .chezmoi.osRelease.id "debian" -}}
-sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim
 
 {{ else if eq .chezmoi.osRelease.id "fedora" -}}
-sudo dnf install -y fzf ripgrep zoxide
+sudo dnf install -y fzf ripgrep zoxide vim
 
 {{ else if or (eq .chezmoi.osRelease.id "rhel") (eq .chezmoi.osRelease.id "rocky") -}}
-sudo dnf install -y fzf ripgrep zoxide
+sudo dnf install -y fzf ripgrep zoxide vim
 
 {{ else if eq .chezmoi.osRelease.id "arch" -}}
-sudo pacman -S --needed --noconfirm fzf ripgrep zoxide
+sudo pacman -S --needed --noconfirm fzf ripgrep zoxide vim
 
 {{ else if eq .chezmoi.osRelease.id "alpine" -}}
 sudo apk add fzf ripgrep zoxide
