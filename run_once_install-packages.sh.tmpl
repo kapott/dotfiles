@@ -1,0 +1,28 @@
+#!/bin/bash
+
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS
+brew install fzf ripgrep
+
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm fzf ripgrep
+
+{{ else if eq .chezmoi.osRelease.id "ubuntu" -}}
+sudo apt-get update && sudo apt-get install -y fzf ripgrep
+
+{{ else if eq .chezmoi.osRelease.id "debian" -}}
+sudo apt-get update && sudo apt-get install -y fzf ripgrep
+
+{{ else if eq .chezmoi.osRelease.id "fedora" -}}
+sudo dnf install -y fzf ripgrep
+
+{{ else if or (eq .chezmoi.osRelease.id "rhel") (eq .chezmoi.osRelease.id "rocky") -}}
+sudo dnf install -y fzf ripgrep
+
+{{ else if eq .chezmoi.osRelease.id "alpine" -}}
+sudo apk add fzf ripgrep
+
+{{ else -}}
+echo "Unknown OS/distro: {{ .chezmoi.os }} / {{ .chezmoi.osRelease.id }}"
+echo "Please install fzf and ripgrep manually."
+{{ end -}}
