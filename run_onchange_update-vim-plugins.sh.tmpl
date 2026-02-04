@@ -1,5 +1,5 @@
 #!/bin/bash
-# vimrc hash: {{ include "dot_config/vim/vimrc" | sha256sum }}
+# vimrc hash: {{ include "private_dot_config/vim/vimrc" | sha256sum }}
 
 echo "vimrc changed, updating Vim plugins..."
 vim +PluginInstall +PluginClean! +qall

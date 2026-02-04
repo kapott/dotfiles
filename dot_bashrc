@@ -1,0 +1,9 @@
+# Source all config from ~/.config/bash/bashrc.d/
+BASH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/bash/bashrc.d"
+
+if [ -d "$BASH_CONFIG_DIR" ]; then
+    for file in "$BASH_CONFIG_DIR"/*.bash; do
+        [ -r "$file" ] && source "$file"
+    done
+    unset file
+fi
