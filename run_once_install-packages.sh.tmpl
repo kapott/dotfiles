@@ -27,25 +27,32 @@ echo "Unknown OS/distro: {{ .chezmoi.os }} / {{ .chezmoi.osRelease.id }}"
 echo "Please install fzf, ripgrep, and zoxide manually."
 {{ end -}}
 
-{{ if .desktop -}}
-# Desktop packages
-{{ if eq .chezmoi.os "darwin" -}}
-brew install --cask alacritty font-hack-nerd-font
-brew install dunst rofi
-
-{{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
-sudo apt-get install -y fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
-
+{{ if eq .wm "i3" -}}
+# i3 packages
+{{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
+sudo apt-get install -y i3 i3status fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
 {{ else if eq .chezmoi.osRelease.id "debian" -}}
-sudo apt-get install -y fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
-
+sudo apt-get install -y i3 i3status fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
 {{ else if eq .chezmoi.osRelease.id "fedora" -}}
-sudo dnf install -y google-noto-fonts-common dex xss-lock network-manager-applet pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
-
+sudo dnf install -y i3 i3status google-noto-fonts-common dex xss-lock network-manager-applet pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
 {{ else if eq .chezmoi.osRelease.id "arch" -}}
-sudo pacman -S --needed --noconfirm ttf-hack-nerd dex xss-lock network-manager-applet libpulse brightnessctl alacritty rofi flameshot peek dunst polybar
+sudo pacman -S --needed --noconfirm i3-wm i3status ttf-hack-nerd dex xss-lock network-manager-applet libpulse brightnessctl alacritty rofi flameshot peek dunst polybar
+{{ end -}}
+{{ end -}}
 
-{{ else -}}
-echo "Desktop packages: install manually: hack nerd font, dex, xss-lock, nm-applet, pactl, brightnessctl, alacritty, rofi, flameshot, peek, dunst, polybar"
+{{ if eq .wm "sway" -}}
+# sway packages
+{{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
+sudo apt-get install -y sway waybar wofi alacritty
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm sway waybar wofi alacritty
+{{ end -}}
+{{ end -}}
+
+{{ if eq .wm "hyprland" -}}
+# hyprland packages
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm hyprland waybar wofi alacritty
+{{ end -}}
 {{ end -}}
 {{ end -}}

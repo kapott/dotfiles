@@ -1,0 +1,25 @@
+#!/bin/bash
+{{ if ne .wm "i3" -}}
+exit 0
+{{ end -}}
+
+# ============================================
+# i3 packages
+# ============================================
+
+{{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
+sudo apt-get update && sudo apt-get install -y i3 i3status fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
+
+{{ else if eq .chezmoi.osRelease.id "debian" -}}
+sudo apt-get update && sudo apt-get install -y i3 i3status fonts-hack-ttf dex xss-lock network-manager-gnome pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
+
+{{ else if eq .chezmoi.osRelease.id "fedora" -}}
+sudo dnf install -y i3 i3status google-noto-fonts-common dex xss-lock network-manager-applet pulseaudio-utils brightnessctl alacritty rofi flameshot peek dunst polybar
+
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm i3-wm i3status ttf-hack-nerd dex xss-lock network-manager-applet libpulse brightnessctl alacritty rofi flameshot peek dunst polybar
+
+{{ else -}}
+echo "i3 selected but no package list for {{ .chezmoi.osRelease.id }}"
+
+{{ end -}}

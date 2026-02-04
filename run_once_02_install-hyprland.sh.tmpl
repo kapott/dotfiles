@@ -1,0 +1,20 @@
+#!/bin/bash
+{{ if ne .wm "hyprland" -}}
+exit 0
+{{ end -}}
+
+# ============================================
+# hyprland packages
+# ============================================
+
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm hyprland waybar wofi alacritty foot
+
+{{ else if eq .chezmoi.osRelease.id "fedora" -}}
+sudo dnf install -y hyprland waybar wofi alacritty foot
+
+{{ else -}}
+echo "hyprland selected but no package list for {{ .chezmoi.osRelease.id }}"
+echo "Consider installing from source or adding a COPR/AUR"
+
+{{ end -}}

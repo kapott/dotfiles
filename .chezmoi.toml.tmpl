@@ -1,4 +1,4 @@
 [data]
     name = {{ promptString "name" | quote }}
     email = {{ promptString "email" | quote }}
-    desktop = {{ promptBool "desktop (has graphical session)" }}
+    wm = {{ promptString "window manager (kde/gnome/xfce/i3/sway/hyprland/none)" | quote }}

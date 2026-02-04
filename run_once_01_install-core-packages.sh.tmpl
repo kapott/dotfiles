@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# ============================================
+# Core packages (alle systemen)
+# ============================================
+
+{{ if eq .chezmoi.os "darwin" -}}
+brew install fzf ripgrep zoxide
+
+{{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide
+
+{{ else if eq .chezmoi.osRelease.id "debian" -}}
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide
+
+{{ else if eq .chezmoi.osRelease.id "fedora" -}}
+sudo dnf install -y fzf ripgrep zoxide
+
+{{ else if or (eq .chezmoi.osRelease.id "rhel") (eq .chezmoi.osRelease.id "rocky") -}}
+sudo dnf install -y fzf ripgrep zoxide
+
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm fzf ripgrep zoxide
+
+{{ else if eq .chezmoi.osRelease.id "alpine" -}}
+sudo apk add fzf ripgrep zoxide
+
+{{ else -}}
+echo "Unknown OS/distro: {{ .chezmoi.os }} / {{ .chezmoi.osRelease.id }}"
+echo "Please install fzf, ripgrep, and zoxide manually."
+
+{{ end -}}

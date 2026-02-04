@@ -1,4 +1,15 @@
-{{ if not (hasKey .chezmoi.config.data "desktop") | or (not .desktop) }}
+{{ if ne .wm "i3" }}
 .config/i3
 .config/i3status
+.config/polybar
+{{ end }}
+{{ if ne .wm "sway" }}
+.config/sway
+.config/waybar
+{{ end }}
+{{ if ne .wm "hyprland" }}
+.config/hypr
+{{ end }}
+{{ if ne .wm "xfce" }}
+.config/xfce4
 {{ end }}
