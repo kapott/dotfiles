@@ -130,6 +130,18 @@ ipinfo() {
 	curl http://ipinfo.io/$1
 }
 
+kc() {
+  kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
+}
+
+kn() {
+  kubectl config set-context --current --namespace "$(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | fzf)"
+}
+
+k() {
+  kubectl "$@"
+}
+
 # Usage: killport <portnum>
 # Kills the process running on port <portnum>
 killport() {
