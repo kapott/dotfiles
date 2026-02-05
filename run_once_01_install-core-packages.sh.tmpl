@@ -4,6 +4,14 @@
 # Core packages (alle systemen)
 # ============================================
 
+{{ if ne .chezmoi.os "darwin" -}}
+if ! curl -s --connect-timeout 3 https://deb.debian.org > /dev/null 2>&1; then
+    echo "WARNING: No internet - skipping package install"
+    echo "Install manually: fzf ripgrep zoxide vim"
+    exit 0
+fi
+{{ end -}}
+
 {{ if eq .chezmoi.os "darwin" -}}
 brew install fzf ripgrep zoxide
 
