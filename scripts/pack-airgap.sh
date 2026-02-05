@@ -5,7 +5,7 @@ OUTDIR="${1:-./airgap-bundle}"
 mkdir -p "$OUTDIR/bin" "$OUTDIR/vim-bundle" "$OUTDIR/dotfiles"
 
 echo "Collecting binaries..."
-for bin in chezmoi fzf rg zoxide; do
+for bin in chezmoi fzf rg zoxide vault; do
     BINPATH=$(which "$bin" 2>/dev/null)
     if [ -n "$BINPATH" ]; then
         cp "$BINPATH" "$OUTDIR/bin/"
