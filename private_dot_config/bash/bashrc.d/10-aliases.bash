@@ -15,20 +15,21 @@ alias l='ls -CF'
 # One letter aliases
 alias f='find'
 alias g='git'
-alias t='tmux new -AsBOFH'
-# alias c= # Managed door zoxide
-# alias k='kubectl' # k wrapper functies van kubectl van toepassing.
+# t='task' is in time/tasks.bash
+# c is managed by zoxide
+# k is the kubectl wrapper in flow/guardrails.bash
 alias l='ls'
 alias m='mutt'
 alias v='vim'
 alias u='upg'
 alias z='chezmoi'
 
+# tmux quick-attach (tx since t=task)
+alias tx='tmux new -AsBOFH'
+
 # Two letter aliases
 alias ff='find . -type f -name'
 alias gh='history|grep'
-alias ll='ls -laH'
-alias lt='ls --human-readable --size -1 -S --classify'
 alias sv='sudo vim'
 
 # Three letter aliases
