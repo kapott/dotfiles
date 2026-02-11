@@ -10,6 +10,6 @@ export XDG_STATE_HOME=$HOME/.local/state
 
 # Toolkit paths
 export OBSIDIAN_PATH="$HOME/Drives/SSD1/Nextcloud/Notes"
-export THOUGHTS_DIR="$OBSIDIAN_PATH/thoughts"
+export THOUGHTS_DIR="$OBSIDIAN_PATH/0_inbox"
 export PROJECTS_DIR="$HOME/Documents/Git"
 export TASKFUNC_PROJECTS_DIR="$PROJECTS_DIR"
