@@ -7,34 +7,34 @@
 {{ if ne .chezmoi.os "darwin" -}}
 if ! curl -s --connect-timeout 3 https://deb.debian.org > /dev/null 2>&1; then
     echo "WARNING: No internet - skipping package install"
-    echo "Install manually: fzf ripgrep zoxide vim"
+    echo "Install manually: fzf ripgrep zoxide vim jq taskwarrior timewarrior"
     exit 0
 fi
 {{ end -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
-brew install fzf ripgrep zoxide
+brew install fzf ripgrep zoxide jq task timewarrior
 
 {{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "pop") -}}
-sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim jq taskwarrior timewarrior
 
 {{ else if eq .chezmoi.osRelease.id "debian" -}}
-sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim
+sudo apt-get update && sudo apt-get install -y fzf ripgrep zoxide vim jq taskwarrior timewarrior
 
 {{ else if eq .chezmoi.osRelease.id "fedora" -}}
-sudo dnf install -y fzf ripgrep zoxide vim
+sudo dnf install -y fzf ripgrep zoxide vim jq task timew
 
 {{ else if or (eq .chezmoi.osRelease.id "rhel") (eq .chezmoi.osRelease.id "rocky") -}}
-sudo dnf install -y fzf ripgrep zoxide vim
+sudo dnf install -y fzf ripgrep zoxide vim jq task timew
 
 {{ else if eq .chezmoi.osRelease.id "arch" -}}
-sudo pacman -S --needed --noconfirm fzf ripgrep zoxide vim
+sudo pacman -S --needed --noconfirm fzf ripgrep zoxide vim jq task timew
 
 {{ else if eq .chezmoi.osRelease.id "alpine" -}}
-sudo apk add fzf ripgrep zoxide
+sudo apk add fzf ripgrep zoxide jq
 
 {{ else -}}
 echo "Unknown OS/distro: {{ .chezmoi.os }} / {{ .chezmoi.osRelease.id }}"
-echo "Please install fzf, ripgrep, and zoxide manually."
+echo "Please install fzf, ripgrep, zoxide, jq, taskwarrior, and timewarrior manually."
 
 {{ end -}}

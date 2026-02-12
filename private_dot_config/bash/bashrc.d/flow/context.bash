@@ -55,15 +55,15 @@ workon() {
   fi
 
   # ── Taskwarrior context ───────────────────────────────────────────────
-  if command -v task &>/dev/null; then
+  if type -P task &>/dev/null; then
     # Create context if it doesn't exist
-    if ! command task _context 2>/dev/null | grep -qx "$project_id"; then
-      yes | command task context define "$project_id" "project:$project_id" >/dev/null 2>&1
+    if ! command task _context </dev/null 2>/dev/null | grep -qx "$project_id"; then
+      command task rc.confirmation=off context define "$project_id" "project:$project_id" </dev/null >/dev/null 2>&1
     fi
     command task context "$project_id" </dev/null >/dev/null 2>&1
 
     echo -e "\033[1;33m📋 Tasks:\033[0m"
-    command task rc.verbose=nothing list 2>/dev/null | head -15 | sed 's/^/  /' || echo "  No pending tasks"
+    command task rc.verbose=nothing list </dev/null 2>/dev/null | head -15 | sed 's/^/  /' || echo "  No pending tasks"
     echo ""
   fi
 
@@ -95,7 +95,7 @@ pp() {
 
 # ── Clear context ───────────────────────────────────────────────────────
 poff() {
-  if command -v task &>/dev/null; then
+  if type -P task &>/dev/null; then
     command task context none >/dev/null 2>&1
   fi
   unset CURRENT_PROJECT TASKFUNC_CURRENT_PROJECT
